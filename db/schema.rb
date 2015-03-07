@@ -11,7 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307040036) do
+ActiveRecord::Schema.define(version: 20150307175614) do
+
+  create_table "capture_flags", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "flag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flags", force: :cascade do |t|
+    t.boolean  "captured"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "users_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "points",  default: 0
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -5,8 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   before_save :ensure_authentication_token
 
-  has_one :game
+  has_many :games, through: :user_game
+  has_many :user_games
+  has_many :capture_flags
   has_one :flag
+  # has_many :flags, :capture_flags
 
    def ensure_authentication_token
      if authentication_token.blank?
