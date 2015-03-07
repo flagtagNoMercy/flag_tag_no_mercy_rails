@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
   private
     def as_json(opts={})
+      #opts.merge!
       super(:only => [:id, :email])
     end
 

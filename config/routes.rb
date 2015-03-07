@@ -3,7 +3,7 @@ Rails.application.routes.draw do
                                        :sessions => "sessions" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root to: "users#index"
+  #root to: "users#index"
   resource :users do
     resource :games
   end
