@@ -11,25 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307184140) do
+ActiveRecord::Schema.define(version: 20150307201723) do
 
   create_table "capture_flags", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "flag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "value",      default: 10
+    t.integer  "player_id"
   end
 
   create_table "flags", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "current_value",    default: 10
+    t.text     "item_description", default: "", null: false
+    t.integer  "player_id"
   end
 
   create_table "games", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.float    "longitude_start_point"
+    t.float    "latitude_start_point"
+    t.float    "radius"
+    t.integer  "user_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "points",  default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,11 +67,5 @@ ActiveRecord::Schema.define(version: 20150307184140) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
-
-  create_table "users_games", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "game_id"
-    t.integer "points",  default: 0
-  end
 
 end
