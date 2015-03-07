@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307175614) do
+ActiveRecord::Schema.define(version: 20150307184140) do
 
   create_table "capture_flags", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20150307175614) do
   end
 
   create_table "flags", force: :cascade do |t|
-    t.boolean  "captured"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float    "latitude"
@@ -29,18 +28,9 @@ ActiveRecord::Schema.define(version: 20150307175614) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer  "users_count"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  create_table "user_games", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "game_id"
-    t.integer "points",  default: 0
-  end
-
-ActiveRecord::Schema.define(version: 20150307013248) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -63,9 +53,11 @@ ActiveRecord::Schema.define(version: 20150307013248) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
-  end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table "users_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "points",  default: 0
+  end
 
 end
