@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :players
   has_many :games, through: :players
+  has_many :flags, through: :players
 
    def ensure_authentication_token
      if authentication_token.blank?
