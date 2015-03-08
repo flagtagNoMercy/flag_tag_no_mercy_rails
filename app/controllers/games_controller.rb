@@ -2,8 +2,16 @@ class GamesController < ApplicationController
   before_action :authenticate_user_from_token!
 
    def index
+     #binding.pry
      @games = current_user.games.all
      render json: {:game => @games}, status: :ok
+   end
+
+   #GET    /users/:user_id/games/:id
+   def show
+     @game = Game.find(params[:id])
+     @player = @game.players.all
+     @user = current_user
    end
 
    def create
