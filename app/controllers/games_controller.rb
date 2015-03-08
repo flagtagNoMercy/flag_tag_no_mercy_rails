@@ -2,8 +2,21 @@ class GamesController < ApplicationController
   before_action :authenticate_user_from_token!
 
    def index
+     #binding.pry
      @games = current_user.games.all
      render json: {:game => @games}, status: :ok
+   end
+
+   #GET    /users/:user_id/games/:id
+   def show
+     @game = Game.find(params[:id])
+     @players = @game.players.all
+     @flag = @game.flags
+     @finish_check = finished?(@game)
+     render json: {:players => @players, :email => @game.users.select(:email, :id),
+                   :game => {:id => @game.id, :radius => @game.radius,
+                   :time_limit => @game.time_limit, game_finished: @finish_check
+                   }, :flags => @flag  }, status: :ok
    end
 
    def create
@@ -43,7 +56,11 @@ class GamesController < ApplicationController
 
 
    private
-   def game_params
-     params.require(:game).permit(:longitude_start_point, :latitude_start_point, :radius, :user_id)
-   end
+     def game_params
+       params.require(:game).permit(:longitude_start_point, :latitude_start_point, :radius, :user_id)
+     end
+
+     def finished?(game)
+       game.created_at + game.time_limit.minutes < Time.now
+     end
 end

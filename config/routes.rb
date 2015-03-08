@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   resources :users do
     resources :games
   end
+
+  #post 'users/:user_id/games/:id/players', to: 'players#join', as: 'join_player'
+  get 'users/:user_id/invite', to: 'users#invite'
   post 'users/:user_id/games/:id/join', to: 'games#join', as: 'join_user_game'
   post 'users/:user_id/games/:id/flag', to: 'flag#set', as: 'flag'
+
 
 
   # You can have the root of your site routed with "root"
