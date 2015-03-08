@@ -13,8 +13,10 @@ class GamesController < ApplicationController
      @players = @game.players.all
      @flag = @game.flags
      @finish_check = finished?(@game)
-     render json: {:players => @players, :game => {:id => @game.id, :radius => @game.radius,
-                   :time_limit => @game.time_limit, game_finished: @finish_check }, :flags => @flag  }, status: :ok
+     render json: {:players => @players, :email => @game.users.select(:email, :id),
+                   :game => {:id => @game.id, :radius => @game.radius,
+                   :time_limit => @game.time_limit, game_finished: @finish_check
+                   }, :flags => @flag  }, status: :ok
    end
 
    def create
