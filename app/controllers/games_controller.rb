@@ -12,6 +12,7 @@ class GamesController < ApplicationController
      @game = Game.find(params[:id])
      @player = @game.players.all
      @user = current_user
+     render json: {:players => @players, }
    end
 
    def create

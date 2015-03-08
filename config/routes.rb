@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   #post 'users/:user_id/games/:id/players', to: 'players#join', as: 'join_player'
   post 'users/:user_id/games/:id/join', to: 'games#join', as: 'join_user_game'
+  get 'users/:user_id/invite', to: 'users#invite'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
