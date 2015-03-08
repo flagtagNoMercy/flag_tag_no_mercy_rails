@@ -11,26 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308111657) do
+ActiveRecord::Schema.define(version: 20150308110301) do
 
   create_table "capture_flags", force: :cascade do |t|
+    t.integer  "user_id"
     t.integer  "flag_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "value",      default: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "player_id"
+    t.integer  "value"
   end
 
   create_table "flags", force: :cascade do |t|
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "current_value",           default: 10
-    t.text     "item_description",        default: "",    null: false
+    t.text     "item_description",        default: "", null: false
     t.integer  "player_id"
     t.float    "radius"
-    t.boolean  "in_radius",               default: false
+    t.boolean  "in_radius"
     t.integer  "flag_time_limit_minutes", default: 15
   end
 
@@ -41,8 +42,8 @@ ActiveRecord::Schema.define(version: 20150308111657) do
     t.float    "latitude_start_point"
     t.float    "radius"
     t.integer  "user_id"
-    t.integer  "time_limit",            default: 60
     t.integer  "players_count"
+    t.integer  "time_limit",            default: 60
   end
 
   create_table "players", force: :cascade do |t|
