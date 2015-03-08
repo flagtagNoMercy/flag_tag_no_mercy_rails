@@ -10,9 +10,11 @@ class GamesController < ApplicationController
    #GET    /users/:user_id/games/:id
    def show
      @game = Game.find(params[:id])
-     @player = @game.players.all
-     @user = current_user
-     render json: {:players => @players, }
+     @players = @game.players.all
+     @flag = @game.flags
+     @finish_check = finished?(@game)
+     render json: {:players => @players, :game => {:id => @game.id, :radius => @game.radius,
+                   :time_limit => @game.time_limit, game_finished: @finish_check }, :flags => @flag  }, status: :ok
    end
 
    def create
@@ -52,7 +54,11 @@ class GamesController < ApplicationController
 
 
    private
-   def game_params
-     params.require(:game).permit(:longitude_start_point, :latitude_start_point, :radius, :user_id)
-   end
+     def game_params
+       params.require(:game).permit(:longitude_start_point, :latitude_start_point, :radius, :user_id)
+     end
+
+     def finished?(game)
+       game.created_at + game.time_limit.minutes < Time.now
+     end
 end

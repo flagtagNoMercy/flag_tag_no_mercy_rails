@@ -9,8 +9,6 @@ class Game < ActiveRecord::Base
     #check when capture, set or display
   end
 
-  
-
   private
   def game_params
     params.require(:game).permit(:latitude_start_point, :longitude_start_point, :radius, :user_id)
