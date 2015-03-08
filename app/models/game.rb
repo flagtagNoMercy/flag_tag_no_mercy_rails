@@ -5,11 +5,10 @@ class Game < ActiveRecord::Base
   has_many :flags, through: :players
   has_many :users, through: :players
 
-  def game_expired?
-    #check when capture, set or display
-  end
 
-  
+  def finished?
+    self.created_at + self.time_limit.minutes < Time.now
+  end
 
   private
   def game_params

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'users/:user_id/games/:id/join', to: 'games#join', as: 'join_user_game'
   post 'users/:user_id/games/:id/flag', to: 'flag#set', as: 'flag'
 
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
