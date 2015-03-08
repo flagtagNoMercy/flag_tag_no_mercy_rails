@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+#mailer Mandrill
+gem 'mandrill-api'
 # devise auth
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
