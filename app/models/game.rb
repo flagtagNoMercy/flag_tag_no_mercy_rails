@@ -19,6 +19,13 @@ class Game < ActiveRecord::Base
       end
   end
 
+  # def destroy
+  #   @user = User.find(params[:user_id])
+  #   @game = Game.find(params[:game_id])
+  #   @user.games.find(@game)
+  #
+  # end
+
   private
   def game_params
     params.require(:game).permit(:latitude_start_point, :longitude_start_point, :radius, :user_id)
