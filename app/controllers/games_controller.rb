@@ -9,7 +9,7 @@ class GamesController < ApplicationController
    def create
      @user = User.find(params[:user_id])
      @game = @user.games.create(game_params)
-       if @game.save
+       if @game
          render json: {:game => @game}, status: :ok
        else
          render json: {:error => @game.errors}, status: :unprocessable_entity
